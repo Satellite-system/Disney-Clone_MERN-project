@@ -6,7 +6,7 @@ const Login = (props) => {
     <Container>
         <Content>
           <CTA>
-            <CLOGO src='/images/cta-logo-one.svg' alt='' />
+            <CLOGoOne src='/images/cta-logo-one.svg' alt='' />
           </CTA>
           <BgImg />
         </Content>
@@ -49,12 +49,16 @@ const BgImg = styled.div`
   z-index: -1;
 `;
 
-const CTA = styled.p`
+const CTA = styled.div`
 
 `;
 
-const CLOGO = styled.img`
-
+const CLOGoOne = styled.img`
+margin-bottom: 12px;
+max-width: 600px;
+min-height: 1px;
+  display: block;
+  width: 100%;
 `;
 
 export default Login

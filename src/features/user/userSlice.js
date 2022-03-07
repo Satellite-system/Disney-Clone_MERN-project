@@ -20,8 +20,8 @@ const userSlice = createSlice({
             state.name = null;
             state.email = null;
             state.photo = null;
-        }
-    }
+        },
+    },
 });
 
 export const {setUserLoginDetails, setSignOutState} = userSlice.actions;

@@ -1,4 +1,3 @@
-import './App.css';
 import {
   BrowserRouter,
   Routes,
@@ -10,17 +9,15 @@ import Home from './Components/Home';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
+    <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route exact path="/home" element={<Home />} />
       </Routes>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route exact path="/" element={<Login />} />
       </Routes>
     </BrowserRouter>
-    </div>
   );
 }
 

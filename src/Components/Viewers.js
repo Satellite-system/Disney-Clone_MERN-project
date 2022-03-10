@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Viewers = () => {
+const Viewers = (props) => {
   return (
     <Container>
       <Wrap>

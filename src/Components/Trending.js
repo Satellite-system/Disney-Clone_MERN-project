@@ -1,34 +1,29 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import { selectTrending } from '../features/movie/movieSlice';
 
 const Trending = () => {
+  const movies = useSelector(selectTrending);
+  // console.log("movies: ",movies);
+
   return (
     <Container>
         <h3> Trendings</h3>
-
-        <Content>
-        <Wrap>
-          <Link to='/'>
-            <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/87F1DCF36049558159913ADFD18A800DE1121771540033EC3A7651B8FE154CEB/scale?width=400&aspectRatio=1.78&format=jpeg" alt="" />  
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to='/'>
-            <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/87F1DCF36049558159913ADFD18A800DE1121771540033EC3A7651B8FE154CEB/scale?width=400&aspectRatio=1.78&format=jpeg" alt="" />  
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to='/'>
-            <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/87F1DCF36049558159913ADFD18A800DE1121771540033EC3A7651B8FE154CEB/scale?width=400&aspectRatio=1.78&format=jpeg" alt="" />  
-          </Link>
-        </Wrap>
-        <Wrap>
-          <Link to='/'>
-            <img src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/87F1DCF36049558159913ADFD18A800DE1121771540033EC3A7651B8FE154CEB/scale?width=400&aspectRatio=1.78&format=jpeg" alt="" />  
-          </Link>
-        </Wrap>
-        </Content>
+      <Content>
+        {
+        movies &&
+          movies.map((movie, key)=>(
+              //{console.log(movie.title)}
+            <Wrap key={key}>
+              <Link to={'/detail/'+movie.id} >
+                <img src={movie.cardImg}  alt={movie.title}  />
+              </Link>
+            </Wrap>
+          ))
+        }
+      </Content>
     </Container>
   )
 }

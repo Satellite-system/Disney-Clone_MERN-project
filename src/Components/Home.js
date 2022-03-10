@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import db from '../firebase';
 import { setMovies } from '../features/movie/movieSlice';
+import { doc, collection, query, where, onSnapshot, getDocs, getFirestore } from "firebase/firestore";
 import { selectUserName } from '../features/user/userSlice';
 
 const Home = (props) => {
@@ -21,24 +22,28 @@ const Home = (props) => {
   let originals = [];
   let trending = [];
 
-  useEffect(()=>{
-    db.collection('movies').onSnapShot((snapshot)=>{
-      snapshot.docs.map((doc)=>{
-        switch(doc.data().type){
-          case 'recommend':
-            recommend.push({id: doc.id, ...doc.data()})
-            break;
-          case 'new':
-            newDisney.push({id: doc.id, ...doc.data()})
-            break;
-          case 'trending':
-            trending.push({id: doc.id, ...doc.data()})
-            break;
-          case 'original':
-            originals.push({id: doc.id, ...doc.data()})
-            break;
-        }
-      });
+  useEffect(async ()=>{
+
+    const q = query(collection(db, "movies"));
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log("recommend ",recommend);
+      switch(doc.data().type){
+        case 'recommend':
+          recommend=[...recommend,{id: doc.id, ...doc.data()}]
+          break;
+        case 'new':
+          newDisney=[...newDisney,{id: doc.id, ...doc.data()}]
+          break;
+        case 'trending':
+          trending=[...trending,{id: doc.id, ...doc.data()}]
+          break;
+        case 'original':
+          originals=[...originals,{id: doc.id, ...doc.data()}]
+          break;
+      }
     });
 
     dispatch(setMovies({

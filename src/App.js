@@ -6,6 +6,7 @@ import {
 import Login from './Components/Login';
 import Header from './Components/Header';
 import Home from './Components/Home';
+import Details from "./Components/Details";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
       </Routes>
       <Routes>
         <Route exact path="/" element={<Login />} />
+      </Routes>
+      <Routes>
+        <Route path="/detail/:id" element={<Details />} />
       </Routes>
     </BrowserRouter>
   );

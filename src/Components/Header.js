@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, provider } from "../firebase";
 import {
   selectUserName,
@@ -68,10 +68,10 @@ const Header = (props) => {
       ) : (
         <>
           <NavMenu>
-            <a href="/home">
+            <Link to="/home">
               <img src="/images/home-icon.svg" alt="HOME" />
               <span>HOME</span>
-            </a>
+            </Link>
             <a>
               <img src="/images/search-icon.svg" alt="SEARCH" />
               <span>SEARCH</span>
@@ -180,6 +180,7 @@ const NavMenu = styled.div`
       }
     }
     &:hover {
+      cursor: pointer;
       span:before {
         transform: scaleX(1);
         visibility: visible;

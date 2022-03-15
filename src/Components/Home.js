@@ -10,10 +10,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import db from '../firebase';
 import { setMovies } from '../features/movie/movieSlice';
-import { doc, collection, query, where, onSnapshot, getDocs, getFirestore } from "firebase/firestore";
+import { collection, query, getDocs} from "firebase/firestore";
 import { selectUserName } from '../features/user/userSlice';
 
-const Home = (props) => {
+const Home = ({setProgress}) => {
   const dispatch = useDispatch();
   const userName = useSelector(selectUserName);
 
@@ -23,7 +23,7 @@ const Home = (props) => {
   let trending = [];
 
   useEffect(async ()=>{
-
+    setProgress(0);
     const q = query(collection(db, "movies"));
 
     const querySnapshot = await getDocs(q);
@@ -53,6 +53,7 @@ const Home = (props) => {
       trending: trending
     }));
 
+    setProgress(100);
   }, [userName]);
 
 
@@ -62,7 +63,7 @@ const Home = (props) => {
       <Viewers />
       <Recommands />
       <NewDisney />
-      <Originals />
+      <Originals/>
       <Trending/>
     </Container>
   )

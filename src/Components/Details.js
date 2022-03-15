@@ -5,22 +5,27 @@ import db from '../firebase';
 import { doc, getDoc} from "firebase/firestore";
 
 
-const Details = (props) => {
-    const id = useParams();
+const Details = ({setProgress}) => {
+    const id = useParams().id;
     const [movieData, setMovieData] = useState('');
 
-    useEffect(async() => {
-        const docRef = doc(db, "movies", id.id); //'wa7F6LTDEFQluIbWUMeh'
+    const getData = async ()=>{
+        const docRef = doc(db, "movies", id); //'wa7F6LTDEFQluIbWUMeh'
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
             setMovieData(docSnap.data());
-            console.log("Document data:", docSnap.data());
+            // console.log("Document data:", docSnap.data());
         } else {
         // doc.data() will be undefined in this case
             console.log("No such document!");
         }
+    };
 
+    useEffect(() => {
+        setProgress(0);
+        getData();
+        setProgress(100);
     },[id]);
     
 
@@ -29,7 +34,7 @@ const Details = (props) => {
         <Background>
         <img 
         src={movieData.backgroundImg} 
-        alt='title'/>
+        alt='img'/>
         </Background>
 
         <TitleImg>
